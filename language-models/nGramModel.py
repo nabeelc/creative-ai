@@ -42,13 +42,17 @@ class NGramModel(object):
                   ['hello', 'goodbye'], that list would become
                   ['^::^', '^:::^', 'hello', 'goodbye', '$:::$'] in the
                   returned copy.
-
-                  Make sure you are not modifying the original text
-                  parameter in this function.
         """
-        textCopy = []
+      
+
 
         # add the rest of your prepData implementation here
+        textCopy = text
+        length = len(textCopy)
+        for i in range(0, length):
+          textCopy[i].insert(0,'^::^')
+          textCopy[i].insert(0, '^:::^')
+          textCopy[i].append('$:::$')
 
         return textCopy
 
@@ -65,8 +69,7 @@ class NGramModel(object):
 
     def trainingDataHasNGram(self, sentence):
         """
-        Requires: sentence is a list of strings, and trainingDataHasNGram
-                  has returned True for this particular language model
+        Requires: sentence is a list of strings
         Modifies: nothing
         Effects:  returns a bool indicating whether or not this n-gram model
                   can be used to choose the next token for the current
@@ -95,7 +98,29 @@ class NGramModel(object):
         Effects:  returns a candidate item (a key in the candidates dictionary)
                   based on the algorithm described in the spec.
         """
-        return
+      
+        keysInCandidates = []
+        valuesInCandidates = []
+        sumOfCumulative = 0
+        cumulativeCountList = []
+        randomInteger = random.randrange(0, sumOfCumulative)
+
+        for i in candidates.keys():
+          keysInCandidates.append()
+
+        for i in candidates.values():
+          valuesInCandidates.append()
+
+        for i in valuesInCandidates:
+          sumOfCumulative = sumOfCumulative + i
+          cumulativeCountList.append(sumOfCumulative)
+
+
+        for i in range(0,len(cumulativeCountList)):
+          if cumulativeCountList[i] > randomInteger:
+            return keysInCandidates[i]
+
+        return 0
 
     def getNextToken(self, sentence):
         """
@@ -107,7 +132,8 @@ class NGramModel(object):
                   For more information on how to put all these functions
                   together, see the spec.
         """
-        return ''
+        nextToken = self.weightedChoice(self.getCandidateDictionary(sentence))
+        return nextToken
 
     def getNextNote(self, musicalSentence, possiblePitches):
         """
